@@ -1,0 +1,72 @@
+/* ===== LOS SANTOS STYLE ===== */
+body{
+  background:linear-gradient(180deg,#0b0b0b,#111);
+  color:#fff;
+  font-family:'Poppins',sans-serif;
+}
+
+a{color:#fff}
+
+.card{
+  max-width:1000px;
+  margin:20px auto;
+  padding:20px;
+  background:#0f0f0f;
+  border-left:6px solid #2ecc71;
+  box-shadow:0 10px 30px rgba(46,204,113,0.2);
+}
+
+h1{
+  font-family:'Press Start 2P';
+  color:#2ecc71;
+}
+
+section h2{
+  margin:20px 0 10px;
+  color:#9be7b0;
+}
+
+.map-img{
+  width:100%;
+  max-width:900px;
+  display:block;
+  margin:20px auto;
+  border-radius:10px;
+}
+
+/* MISJE */
+.mission-toggle{
+  margin-bottom:16px;
+}
+
+.mission-title{
+  cursor:pointer;
+  padding:12px;
+  background:#142214;
+  border-left:6px solid #2ecc71;
+  font-weight:600;
+}
+
+.mission-list{
+  display:none;
+  padding:12px 20px;
+  background:#111;
+  border-left:6px solid #2ecc71;
+}
+
+.mission-list li{
+  padding:4px 0;
+}
+
+.mission-list.show{
+  display:block;
+}
+
+@media (max-width:768px){
+  .cities{
+    grid-template-columns:1fr;
+  }
+  h1{
+    font-size:14px;
+  }
+}
