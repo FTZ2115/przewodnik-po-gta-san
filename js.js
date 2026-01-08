@@ -103,50 +103,21 @@ if (logo && logoHint) {
   });
 }
 
-/* ===== MOBILE SWIPE (iOS Safari friendly) ===== */
-let touchStartX = 0;
-let touchStartY = 0;
+/* ===== MOBILE FRIENDLY: 3x kliknięcie logo ===== */
+const logo = document.querySelector(".header-left");
+let clickCount = 0;
 
-document.addEventListener("touchstart", (e) => {
-  touchStartX = e.touches[0].clientX;
-  touchStartY = e.touches[0].clientY;
-}, {passive: true}); // passive pozwala na scroll
+logo.addEventListener("click", () => {
+  clickCount++;
 
-document.addEventListener("touchmove", (e) => {
-  // zapobiegamy przewijaniu tylko jeśli chcemy swipe
-  e.preventDefault();
-}, {passive: false}); 
-
-document.addEventListener("touchend", (e) => {
-  const endX = e.changedTouches[0].clientX;
-  const endY = e.changedTouches[0].clientY;
-
-  const diffX = endX - touchStartX;
-  const diffY = endY - touchStartY;
-
-  const absX = Math.abs(diffX);
-  const absY = Math.abs(diffY);
-
-  let direction = null;
-
-  const SWIPE_THRESHOLD = 40; // minimalny ruch w px
-
-  if (Math.max(absX, absY) > SWIPE_THRESHOLD) {
-    if (absY > absX && diffY < 0) direction = "ArrowUp";     // swipe w górę
-    else if (absX > absY && diffX < 0) direction = "ArrowLeft"; // swipe w lewo
-    else if (absX > absY && diffX > 0) direction = "ArrowRight"; // swipe w prawo
+  if (clickCount === 3) {
+    openSecretVideo();
+    clickCount = 0; // reset po uruchomieniu
   }
 
-  if (direction) {
-    input.push(direction);
-
-    if (input.length > secretCode.length) {
-      input.shift();
-    }
-
-    if (input.join() === secretCode.join()) {
-      openSecretVideo();
-    }
-  }
+  // opcjonalnie: reset jeśli minie 3 sekundy bez kliknięć
+  setTimeout(() => {
+    clickCount = 0;
+  }, 3000);
 });
 
