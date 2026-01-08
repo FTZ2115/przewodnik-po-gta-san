@@ -102,3 +102,45 @@ if (logo && logoHint) {
     }, 4000);
   });
 }
+
+/* ===== MOBILE GESTURE SECRET ===== */
+
+let touchStartX = 0;
+let touchStartY = 0;
+
+document.addEventListener("touchstart", (e) => {
+  touchStartX = e.changedTouches[0].screenX;
+  touchStartY = e.changedTouches[0].screenY;
+});
+
+document.addEventListener("touchend", (e) => {
+  const endX = e.changedTouches[0].screenX;
+  const endY = e.changedTouches[0].screenY;
+
+  const diffX = endX - touchStartX;
+  const diffY = endY - touchStartY;
+
+  const absX = Math.abs(diffX);
+  const absY = Math.abs(diffY);
+
+  let direction = null;
+
+  if (Math.max(absX, absY) > 50) { // minimalny ruch
+    if (absY > absX && diffY < 0) direction = "ArrowUp";
+    else if (absX > absY && diffX < 0) direction = "ArrowLeft";
+    else if (absX > absY && diffX > 0) direction = "ArrowRight";
+  }
+
+  if (direction) {
+    input.push(direction);
+
+    if (input.length > secretCode.length) {
+      input.shift();
+    }
+
+    if (input.join() === secretCode.join()) {
+      openSecretVideo();
+    }
+  }
+});
+
