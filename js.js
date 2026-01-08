@@ -1,4 +1,3 @@
-/*wczytuje kod js na samym koncu az sie strona zaladuje */
 document.addEventListener("DOMContentLoaded", () => {
 
   /* DARK / LIGHT MODE */
@@ -12,18 +11,13 @@ document.addEventListener("DOMContentLoaded", () => {
   /* MENU */
   const dotMenuBtn = document.getElementById("dotMenuBtn");
   const dotDropdown = document.getElementById("dotDropdown");
-
   if (dotMenuBtn && dotDropdown) {
-    dotMenuBtn.addEventListener("click", () => {
-      dotDropdown.classList.toggle("show");
-    });
+    dotMenuBtn.addEventListener("click", () => dotDropdown.classList.toggle("show"));
   }
 
-  /* TOGGLE SEKCJE (wszystko co ma toggle-title dostaje opcje rozwijania i chowania czyli(faq, mapa i linki))*/ 
+  /* TOGGLE SEKCJE */
   document.querySelectorAll(".toggle-title").forEach(title => {
-    title.addEventListener("click", () => {
-      title.parentElement.classList.toggle("open");
-    });
+    title.addEventListener("click", () => title.parentElement.classList.toggle("open"));
   });
 
   /* LICZNIK */
@@ -37,40 +31,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-/* ciekawostka */
-/* ===== SECRET KONAMI STYLE ===== */
-const secretCode = [
-  "ArrowUp",
-  "ArrowUp",
-  "ArrowUp",
-  "ArrowLeft",
-  "ArrowRight"
-];
-
+/* ===== SECRET KONAMI / LOGO / MOBILE ===== */
+const secretCode = ["ArrowUp","ArrowUp","ArrowUp","ArrowLeft","ArrowRight"];
 let input = [];
 const overlay = document.getElementById("secretVideoOverlay");
 const iframe = document.getElementById("secretIframe");
 const videoURL = "https://www.youtube.com/embed/KSPxHniCtmw?autoplay=1";
 
+// PC - klawiatura
 document.addEventListener("keydown", (e) => {
-
-  // ESC zamyka film
-  if (e.key === "Escape" && overlay.style.display === "flex") {
-    closeSecretVideo();
-    return;
-  }
-
+  if (e.key === "Escape" && overlay.style.display === "flex") { closeSecretVideo(); return; }
   input.push(e.key);
-
-  if (input.length > secretCode.length) {
-    input.shift();
-  }
-
-  if (input.join() === secretCode.join()) {
-    openSecretVideo();
-  }
+  if (input.length > secretCode.length) input.shift();
+  if (input.join() === secretCode.join()) openSecretVideo();
 });
 
+// overlay functions
 function openSecretVideo() {
   iframe.src = videoURL;
   overlay.style.display = "flex";
@@ -84,52 +60,32 @@ function closeSecretVideo() {
 
 // klik w tło
 overlay.addEventListener("click", (e) => {
-  if (e.target === overlay) {
-    closeSecretVideo();
-  }
+  if (e.target === overlay) closeSecretVideo();
 });
 
-/* ===== LOGO CIEKAWOSTKA ===== */
-const logo = document.querySelector(".header-left");
+// LOGO HINT / EASTER EGG
+const logo = document.querySelector(".logo");
 const logoHint = document.getElementById("logoHint");
 
 if (logo && logoHint) {
+  // hint po kliknięciu
   logo.addEventListener("click", () => {
     logoHint.style.display = "block";
-
-    setTimeout(() => {
-      logoHint.style.display = "none";
-    }, 4000);
+    setTimeout(() => { logoHint.style.display = "none"; }, 4000);
   });
+
+  // easter egg 3x kliknięcie
+  let clickCount = 0;
+  logo.addEventListener("click", () => {
+    clickCount++;
+    if (clickCount === 3) { openSecretVideo(); clickCount = 0; }
+    setTimeout(() => { clickCount = 0; }, 3000);
+  });
+
+  // long press (telefon)
+  let pressTimer;
+  logo.addEventListener("touchstart", () => {
+    pressTimer = setTimeout(() => { openSecretVideo(); }, 1000);
+  });
+  logo.addEventListener("touchend", () => { clearTimeout(pressTimer); });
 }
-
-/* ===== EASTER EGG: 3x kliknięcie w logo ===== */
-const logoImg = document.querySelector(".logo"); // bezpośrednio pod img
-let clickCount = 0;
-
-logoImg.addEventListener("click", () => {
-  clickCount++;
-
-  if (clickCount === 3) {
-    // uruchom sekret
-    openSecretVideo();
-    clickCount = 0; // reset
-  }
-
-  // reset licznika po 3 sekundach jeśli nie skończy kliknięć
-  setTimeout(() => {
-    clickCount = 0;
-  }, 3000);
-});
-
-let pressTimer;
-
-logoImg.addEventListener("touchstart", () => {
-  pressTimer = setTimeout(() => {
-    openSecretVideo();
-  }, 1000); // 1 sekunda przytrzymania
-});
-
-logoImg.addEventListener("touchend", () => {
-  clearTimeout(pressTimer);
-});
