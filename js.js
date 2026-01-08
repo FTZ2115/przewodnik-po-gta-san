@@ -103,19 +103,23 @@ if (logo && logoHint) {
   });
 }
 
-/* ===== MOBILE GESTURE SECRET ===== */
-
+/* ===== MOBILE SWIPE (iOS Safari friendly) ===== */
 let touchStartX = 0;
 let touchStartY = 0;
 
 document.addEventListener("touchstart", (e) => {
-  touchStartX = e.changedTouches[0].screenX;
-  touchStartY = e.changedTouches[0].screenY;
-});
+  touchStartX = e.touches[0].clientX;
+  touchStartY = e.touches[0].clientY;
+}, {passive: true}); // passive pozwala na scroll
+
+document.addEventListener("touchmove", (e) => {
+  // zapobiegamy przewijaniu tylko jeśli chcemy swipe
+  e.preventDefault();
+}, {passive: false}); 
 
 document.addEventListener("touchend", (e) => {
-  const endX = e.changedTouches[0].screenX;
-  const endY = e.changedTouches[0].screenY;
+  const endX = e.changedTouches[0].clientX;
+  const endY = e.changedTouches[0].clientY;
 
   const diffX = endX - touchStartX;
   const diffY = endY - touchStartY;
@@ -125,10 +129,12 @@ document.addEventListener("touchend", (e) => {
 
   let direction = null;
 
-  if (Math.max(absX, absY) > 50) { // minimalny ruch
-    if (absY > absX && diffY < 0) direction = "ArrowUp";
-    else if (absX > absY && diffX < 0) direction = "ArrowLeft";
-    else if (absX > absY && diffX > 0) direction = "ArrowRight";
+  const SWIPE_THRESHOLD = 40; // minimalny ruch w px
+
+  if (Math.max(absX, absY) > SWIPE_THRESHOLD) {
+    if (absY > absX && diffY < 0) direction = "ArrowUp";     // swipe w górę
+    else if (absX > absY && diffX < 0) direction = "ArrowLeft"; // swipe w lewo
+    else if (absX > absY && diffX > 0) direction = "ArrowRight"; // swipe w prawo
   }
 
   if (direction) {
