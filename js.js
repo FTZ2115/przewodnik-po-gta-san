@@ -103,21 +103,33 @@ if (logo && logoHint) {
   });
 }
 
-/* ===== MOBILE FRIENDLY: 3x kliknięcie logo ===== */
-const logo = document.querySelector(".header-left");
+/* ===== EASTER EGG: 3x kliknięcie w logo ===== */
+const logoImg = document.querySelector(".logo"); // bezpośrednio pod img
 let clickCount = 0;
 
-logo.addEventListener("click", () => {
+logoImg.addEventListener("click", () => {
   clickCount++;
 
   if (clickCount === 3) {
+    // uruchom sekret
     openSecretVideo();
-    clickCount = 0; // reset po uruchomieniu
+    clickCount = 0; // reset
   }
 
-  // opcjonalnie: reset jeśli minie 3 sekundy bez kliknięć
+  // reset licznika po 3 sekundach jeśli nie skończy kliknięć
   setTimeout(() => {
     clickCount = 0;
   }, 3000);
 });
 
+let pressTimer;
+
+logoImg.addEventListener("touchstart", () => {
+  pressTimer = setTimeout(() => {
+    openSecretVideo();
+  }, 1000); // 1 sekunda przytrzymania
+});
+
+logoImg.addEventListener("touchend", () => {
+  clearTimeout(pressTimer);
+});
