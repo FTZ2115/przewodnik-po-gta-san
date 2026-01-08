@@ -166,6 +166,11 @@ body.light .table-box p,
 body.light .table-box a{
   color:#000;
 }
+
+a {
+  color: purple;
+}
+
 @media (max-width:768px){
   .cities{
     grid-template-columns:1fr;
@@ -173,5 +178,46 @@ body.light .table-box a{
   h1{
     font-size:14px;
   }
+}
+
+/* ===== SECRET VIDEO ===== */
+#secretVideoOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+#secretVideoOverlay iframe {
+  width: 80%;
+  height: 80%;
+}
+
+#secretVideoOverlay .hint {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: #fff;
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+/* ===== LOGO HINT ===== */
+#logoHint {
+  position: fixed;
+  top: 90px;
+  left: 20px;
+  background: #111;
+  border: 1px solid #ffd700;
+    font-family:'Press Start 2P';
+  color: #ffd700;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  display: none;
+  z-index: 1000;
 }
 

@@ -36,3 +36,69 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 });
+
+/* ciekawostka */
+/* ===== SECRET KONAMI STYLE ===== */
+const secretCode = [
+  "ArrowUp",
+  "ArrowUp",
+  "ArrowUp",
+  "ArrowLeft",
+  "ArrowRight"
+];
+
+let input = [];
+const overlay = document.getElementById("secretVideoOverlay");
+const iframe = document.getElementById("secretIframe");
+const videoURL = "https://www.youtube.com/embed/KSPxHniCtmw?autoplay=1";
+
+document.addEventListener("keydown", (e) => {
+
+  // ESC zamyka film
+  if (e.key === "Escape" && overlay.style.display === "flex") {
+    closeSecretVideo();
+    return;
+  }
+
+  input.push(e.key);
+
+  if (input.length > secretCode.length) {
+    input.shift();
+  }
+
+  if (input.join() === secretCode.join()) {
+    openSecretVideo();
+  }
+});
+
+function openSecretVideo() {
+  iframe.src = videoURL;
+  overlay.style.display = "flex";
+}
+
+function closeSecretVideo() {
+  overlay.style.display = "none";
+  iframe.src = "";
+  input = [];
+}
+
+// klik w tło
+overlay.addEventListener("click", (e) => {
+  if (e.target === overlay) {
+    closeSecretVideo();
+  }
+});
+
+/* ===== LOGO CIEKAWOSTKA ===== */
+const logo = document.querySelector(".header-left");
+const logoHint = document.getElementById("logoHint");
+
+if (logo && logoHint) {
+  logo.addEventListener("click", () => {
+    logoHint.style.display = "block";
+
+    setTimeout(() => {
+      logoHint.style.display = "none";
+    }, 4000);
+  });
+}

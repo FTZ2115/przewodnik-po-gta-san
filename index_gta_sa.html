@@ -1,110 +1,140 @@
 <!DOCTYPE html>
 <html lang="pl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Przewodnik po GTA San Andreas</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Przewodnik po GTA San Andreas</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/644820f95a.js" crossorigin="anonymous"></script>
-  <link rel="icon" type="image/png" href="smg.jpg">
-  <link rel="stylesheet" href="styl.css">
-</head>
-<body>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/644820f95a.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="icon" type="image/png" href="smg.jpg" />
+    <link rel="stylesheet" href="styl.css" />
+  </head>
+  <body>
+    <header>
+      <!--Logo po lewej -->
+      <div class="header-left">
+        <img src="logo.jpg" class="logo" />
+        <h1>Przewodnik po GTA San Andreas</h1>
+      </div>
+      <!--przycisk do zmiany koloru tla-->
+      <button id="themeBtn"><i class="fa-solid fa-moon"></i></button>
+    </header>
 
-<header>
-  <!--Logo po lewej -->
-  <div class="header-left">
-    <img src="logo.jpg" class="logo">
-    <h1>Przewodnik po GTA San Andreas</h1>
-  </div>
-  <!--przycisk do zmiany koloru tla-->
-  <button id="themeBtn"><i class="fa-solid fa-moon"></i></button>
-</header>
+    <!-- MENU PO PRAWEJ(ten kwadracik) -->
+    <div class="dot-nav">
+      <button class="dot-menu" id="dotMenuBtn">
+        <i class="fa-solid fa-square"></i>
+      </button>
+      <div class="dot-dropdown" id="dotDropdown">
+        <a href="#cities">Miasta</a>
+        <a href="#faq">FAQ</a>
+        <a href="#map">Mapa</a>
+        <a href="#codes">Kody</a>
+        <a href="#links">Odwiedziny</a>
+      </div>
+    </div>
 
-<!-- MENU PO PRAWEJ(ten kwadracik) -->
-<div class="dot-nav">
-  <button class="dot-menu" id="dotMenuBtn">
-    <i class="fa-solid fa-square"></i>
-  </button>
-  <div class="dot-dropdown" id="dotDropdown">
-    <a href="#cities">Miasta</a>
-    <a href="#faq">FAQ</a>
-    <a href="#map">Mapa</a>
-    <a href="#codes">Kody</a>
-    <a href="#links">Odwiedziny</a>
-  </div>
+    <main>
+      <!-- miasta i linki do innych stron-->
+      <section id="cities">
+        <h2>Główne miasta</h2>
+        <div class="cities">
+          <a href="los_santos.html"
+            ><img src="santos.jpg" /><span>Los Santos</span></a
+          >
+          <a href="san_fierro.html"
+            ><img src="fierro.jpg" /><span>San Fierro</span></a
+          >
+          <a href="las_venturas.html"
+            ><img src="venturas.jpg" /><span>Las Venturas</span></a
+          >
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq" class="toggle-section">
+        <h2 class="toggle-title">FAQ – Najczęściej zadawane pytania</h2>
+
+        <div class="toggle-content table-grid">
+          <div class="table-box">
+            <h3>Top 3 najszybsze auta</h3>
+            <p>Infernus, Bullet, Cheetah</p>
+          </div>
+
+          <div class="table-box">
+            <h3>Ile trwa przejście GTA SA?</h3>
+            <p>Około 30–35 godzin</p>
+          </div>
+        </div>
+      </section>
+
+      <!--zwykle zdjecie mapy-->
+      <section id="map" class="toggle-section">
+        <h2 class="toggle-title">Mapa San Andreas</h2>
+        <div class="toggle-content">
+          <img src="san-andreas-original-eng.jpg" class="map-img" />
+        </div>
+      </section>
+
+      <!--nasze rozwijane linki-->
+      <section id="codes" class="toggle-section">
+        <h2 class="toggle-title">Kody / Speedruny / Poradniki</h2>
+
+        <div class="toggle-content table-grid">
+          <div class="table-box">
+            <h3>Kody</h3>
+            <a href="https://gta.fandom.com/pl/wiki/Kody_do_GTA_San_Andreas"
+              >Kody do GTA San</a
+            >
+          </div>
+          <div class="table-box">
+            <h3>Speedruny</h3>
+            <a href="https://youtube.com" target="_blank">YouTube</a>
+          </div>
+          <div class="table-box">
+            <h3>Poradniki</h3>
+            <a href="https://gta.fandom.com" target="_blank">GTA Wiki</a>
+          </div>
+        </div>
+      </section>
+
+      <!--licznik ile osob jest na stronie-->
+      <section id="links">
+        <h2>Licznik odwiedzin</h2>
+        <p>Odwiedziny: <span id="counter">0</span></p>
+      </section>
+    </main>
+
+    <!-- SECRET VIDEO -->
+<div id="secretVideoOverlay">
+  <div class="hint">ESC lub kliknij tło aby zamknąć</div>
+  <iframe
+    id="secretIframe"
+    frameborder="0"
+    allow="autoplay; encrypted-media"
+    allowfullscreen>
+  </iframe>
 </div>
 
-<main>
-<!-- miasta i linki do innych stron-->
-<section id="cities">
-  <h2>Główne miasta</h2>
-  <div class="cities">
-    <a href="los_santos.html"><img src="santos.jpg"><span>Los Santos</span></a>
-    <a href="san_fierro.html"><img src="fierro.jpg"><span>San Fierro</span></a>
-    <a href="las_venturas.html"><img src="venturas.jpg"><span>Las Venturas</span></a>
-  </div>
-</section>
+<!-- PODPOWIEDŹ PO KLIKNIĘCIU LOGA -->
+<div id="logoHint">
+  💡 Sekret: ↑ ↑ ↑ ← →
+</div>
 
-<!-- FAQ -->
-<section id="faq" class="toggle-section">
-  <h2 class="toggle-title">FAQ – Najczęściej zadawane pytania</h2>
+    <!--autor-->
+    <footer>
+      <p>Projekt GTA San Andreas</p>
+      <p>Wykonawca: Maksymilian Jędrejek</p>
+      <p>Grupa: INLS1_1</p>
+    </footer>
 
-  <div class="toggle-content table-grid">
-    <div class="table-box">
-      <h3>Top 3 najszybsze auta</h3>
-      <p>Infernus, Bullet, Cheetah</p>
-    </div>
-
-    <div class="table-box">
-      <h3>Ile trwa przejście GTA SA?</h3>
-      <p>Około 30–35 godzin</p>
-    </div>
-  </div>
-</section>
-
-<!--zwykle zdjecie mapy-->
-<section id="map" class="toggle-section">
-  <h2 class="toggle-title">Mapa San Andreas</h2>
-  <div class="toggle-content">
-    <img src="san-andreas-original-eng.jpg" class="map-img">
-  </div>
-</section>
-
-<!--nasze rozwijane linki-->
-<section id="codes" class="toggle-section">
-  <h2 class="toggle-title">Kody / Speedruny / Poradniki</h2>
-
-  <div class="toggle-content table-grid">
-    <div class="table-box">
-      <h3>Kody</h3>
-      <a href="https://gta.fandom.com/pl/wiki/Kody_do_GTA_San_Andreas">Kody do GTA San</a>
-    </div>
-    <div class="table-box">
-      <h3>Speedruny</h3>
-      <a href="https://youtube.com" target="_blank">YouTube</a>
-    </div>
-    <div class="table-box">
-      <h3>Poradniki</h3>
-      <a href="https://gta.fandom.com" target="_blank">GTA Wiki</a>
-    </div>
-  </div>
-</section>
-
-<!--licznik ile osob jest na stronie-->
-<section id="links">
-  <h2>Licznik odwiedzin</h2>
-  <p>Odwiedziny: <span id="counter">0</span></p>
-</section>
-
-</main>
-<!--autor-->
-<footer>
-  <p>Projekt GTA San Andreas</p>
-  <p>Wykonawca: Maksymilian Jędrejek</p>
-</footer>
-
-<script src="js.js"></script>
-</body>
+    <script src="js.js"></script>
+  </body>
 </html>
